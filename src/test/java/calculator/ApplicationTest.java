@@ -121,6 +121,31 @@ class ApplicationTest extends NsTest {
         });
     }
 
+    @Test
+    void 커스텀_구분자_연속_구분자_예외() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("//-\\n1--2"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+    @Test
+    void 커스텀_구분자_시작_지점에_구분자_예외() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("//-\\n-1-2"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+    @Test
+    void 커스텀_구분자_종료_지점에_구분자_예외() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("//-\\n1-2-"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+
 
 
     @Override
