@@ -4,8 +4,8 @@ import camp.nextstep.edu.missionutils.test.NsTest;
 import org.junit.jupiter.api.Test;
 
 import static camp.nextstep.edu.missionutils.test.Assertions.assertSimpleTest;
-import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.assertj.core.api.Assertions.assertThat;
 
 class ApplicationTest extends NsTest {
     @Test
@@ -23,6 +23,30 @@ class ApplicationTest extends NsTest {
                 .isInstanceOf(IllegalArgumentException.class)
         );
     }
+
+
+    // 입출력 요구사항 - 구분자와 양수로 구성된 문자열
+    @Test
+    void 입력값_검증() {
+        assertSimpleTest(() -> {
+            run("1,2:3");
+        });
+    }
+
+    @Test
+    void 입력값_빈값_검증() {
+        assertSimpleTest(() -> {
+            run("");
+        });
+    }
+
+    @Test
+    void 입력값_공백_검증() {
+        assertSimpleTest(() -> {
+            run("   ");
+        });
+    }
+
 
     @Override
     public void runMain() {
