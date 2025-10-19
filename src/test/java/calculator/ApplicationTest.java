@@ -69,6 +69,18 @@ class ApplicationTest extends NsTest {
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
+    @Test
+    void 덧셈_음수_예외() {
+        assertThatThrownBy(() -> runException("1,2,-3"))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
+    void 덧셈_입력값_0일때_예외() {
+        assertThatThrownBy(() -> runException("1,2,0"))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
+
 
     @Override
     public void runMain() {
