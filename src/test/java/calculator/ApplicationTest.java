@@ -30,6 +30,12 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
+    void 입력값_토큰_양끝_공백_검증() {
+        assertSimpleTest(() -> run(" 1 , 2 : 3 "));
+    }
+
+
+    @Test
     void 구분자_단일_구분자_검증() {
         assertSimpleTest(() -> {
             run("1,2,3");
@@ -49,6 +55,30 @@ class ApplicationTest extends NsTest {
     void 구분자_잘못된_구분자_검증() {
         assertThatThrownBy(() -> runException("1,2'3"))
                 .isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
+    void 구분자_연속_구분자_예외() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("1,,2"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+    @Test
+    void 구분자_시작_지점에_구분자_예외() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException(",1,2"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+    @Test
+    void 구분자_종료_지점에_구분자_예외() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("1,2,"))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
     }
 
     @Test
