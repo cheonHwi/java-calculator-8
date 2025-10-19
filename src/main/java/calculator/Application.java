@@ -13,7 +13,7 @@ public class Application {
         for (String token : tokenList) {
             try {
                 int parsedToken = Integer.parseInt(token);
-                if(parsedToken < 0) throw new NumberFormatException();
+                if(parsedToken <= 0) throw new NumberFormatException();
                 else result += parsedToken;
             }
             catch (NumberFormatException e) {
