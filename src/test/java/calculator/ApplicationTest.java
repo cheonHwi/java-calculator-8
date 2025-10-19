@@ -47,6 +47,28 @@ class ApplicationTest extends NsTest {
         });
     }
 
+    @Test
+    void 구분자_단일_구분자_검증() {
+        assertSimpleTest(() -> {
+            run("1,2,3");
+            assertThat(output()).contains("결과 : 6");
+        });
+    }
+
+    @Test
+    void 구분자_복수_구분자_검증() {
+        assertSimpleTest(() -> {
+            run("1,2:3");
+            assertThat(output()).contains("결과 : 6");
+        });
+    }
+
+    @Test
+    void 구분자_잘못된_구분자_검증() {
+        assertThatThrownBy(() -> runException("1,2'3"))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
+
 
     @Override
     public void runMain() {
